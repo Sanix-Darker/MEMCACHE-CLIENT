@@ -1,5 +1,7 @@
 # MEMCACHE CLIENT
 
+A client for memcached and a way to generate it's portable distribution.
+
 ## Requirements
 
 - Python (3.x)
