@@ -8,6 +8,8 @@ Client = pymemcache.client.base.Client
 ArgumentParser = argparse.ArgumentParser
 
 # Initialize the arguments
+# Example seting a value : python pmc.py -i 127.0.0.1 -s test -v value -x 100
+# Example getting value : python pmc.py -i 127.0.0.1 -g test
 prs = ArgumentParser()
 prs.add_argument('-i', '--ip', help='The memcache ip address', type=str, default="localhost")
 prs.add_argument('-p', '--port', help='The default port where the memcache is running', type=int, default=11211)
@@ -23,6 +25,6 @@ try:
         client.set("".join(prs.set.replace("\n", "").split()), prs.val, prs.exp)
         print("SET: ",prs.set, ":", prs.val, prs.exp)
     else:
-        if (prs.get != None and client.get(prs.get) != None):
-                print(client.get(prs.get).decode("utf-8"))
-except Exception as es: print(es)
+        if (prs.get != None):
+            print(client.get(prs.get).decode("utf-8"))
+except Exception as es: print("ERROR: ", es)
