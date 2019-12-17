@@ -17,13 +17,12 @@ prs.add_argument('-v', '--val', help='Set the value of what you want to save in 
 prs.add_argument('-x', '--exp', help='Set the expiration time in seconds for the key', type=int, default=0)
 prs = prs.parse_args()
 
-
 try:
     client = Client((prs.ip, prs.port))
     if (prs.set != None):
-        client.set(prs.set, prs.val, prs.exp)
+        client.set("".join(prs.set.replace("\n", "").split()), prs.val, prs.exp)
         print("SET: ",prs.set, ":", prs.val, prs.exp)
     else:
-        if (prs.get != None):
-            print(client.get(prs.get).decode("utf-8"))
-except Exception as es: print("ERROR: ", es)
+        if (prs.get != None and client.get(prs.get) != None):
+                print(client.get(prs.get).decode("utf-8"))
+except Exception as es: print(es)
